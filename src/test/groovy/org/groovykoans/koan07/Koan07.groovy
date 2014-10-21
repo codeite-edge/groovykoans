@@ -33,7 +33,7 @@ class Koan07 extends GroovyTestCase {
         def regexp
         // ------------ START EDITING HERE ----------------------
 
-
+	regexp = /G.*[es]/
 
 
         // ------------ STOP EDITING HERE  ----------------------
@@ -55,7 +55,9 @@ class Koan07 extends GroovyTestCase {
         String groovyString
         // ------------ START EDITING HERE ----------------------
 
-
+	groovyString = '''|In Java a multiline string
+			  |requires using special signs such as +, \\, and others
+			  |and can become difficult to maintain'''.stripMargin()
 
 
         // ------------ STOP EDITING HERE  ----------------------
@@ -86,7 +88,7 @@ class Koan07 extends GroovyTestCase {
         def groovyRegExp
         // ------------ START EDITING HERE ----------------------
 
-
+	groovyRegExp = /(?sm)(.*?)\s+(\d+)\s+(\d+)/
 
 
         // ------------ STOP EDITING HERE  ----------------------
@@ -112,8 +114,7 @@ class Koan07 extends GroovyTestCase {
         def patternInGroovy
         // ------------ START EDITING HERE ----------------------
 
-
-
+	patternInGroovy = ~/\d{3}([,\s])?\d{4}/
 
         // ------------ STOP EDITING HERE  ----------------------
         assert patternInGroovy instanceof Pattern
@@ -125,8 +126,8 @@ class Koan07 extends GroovyTestCase {
         def firstNamesList = []
         // ------------ START EDITING HERE ----------------------
 
-
-
+	
+	firstNamesList = (names =~ /(\w+) \w+/).collect{ it[1] } 
 
         // ------------ STOP EDITING HERE  ----------------------
         assert firstNamesList == ['John', 'Paul', 'George', 'Ringo']
@@ -137,7 +138,7 @@ class Koan07 extends GroovyTestCase {
         boolean isNumberValid = false
         // ------------ START EDITING HERE ----------------------
 
-
+	isNumberValid = (number ==~ /^4[0-9]{12}(?:[0-9]{3})?$/)
 
 
         // ------------ STOP EDITING HERE  ----------------------
@@ -159,7 +160,9 @@ class Koan07 extends GroovyTestCase {
         def result
         // ------------ START EDITING HERE ----------------------
 
-
+	result = song.findAll(/(\w+)([^\w]*)/){
+		m, word, notWord -> (dictionary.containsKey(word) ? dictionary[word] : word) + notWord 
+	}.join()
 
 
         // ------------ STOP EDITING HERE  ----------------------
@@ -187,7 +190,14 @@ class Koan07 extends GroovyTestCase {
         String regexp
         // ------------ START EDITING HERE ----------------------
 
-
+	regexp = ~'''(?ixsm)	# Allow comments and ignore case. Also use Single line and Multiline
+		     (.*?)	# Match the name of the item
+		     \\s+
+		     (\\d+)	# Match the Sold number
+		     \\s+
+		     (\\d+)    	# Match the Leftover'''
+		   
+		    	
 
 
         // ------------ STOP EDITING HERE  ----------------------
