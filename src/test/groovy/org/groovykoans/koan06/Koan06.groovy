@@ -35,7 +35,12 @@ class Koan06 extends GroovyTestCase {
         String groovyResult
         // ------------ START EDITING HERE ----------------------
 
-
+	groovyResult = new StringBuilder().with{
+		append "roses are #FF0000\\n"	
+		append "violets are #0000FF\\n"	
+		append "all my base\\n"
+		append "are belong to you\\n"	
+	}
 
 
         // ------------ STOP EDITING HERE  ----------------------
@@ -53,7 +58,7 @@ class Koan06 extends GroovyTestCase {
         def uniqueTypes = []
         // ------------ START EDITING HERE ----------------------
 
-
+	uniqueTypes = differentTypes.collect {it.class}.unique()
 
 
         // ------------ STOP EDITING HERE  ----------------------
@@ -69,8 +74,12 @@ class Koan06 extends GroovyTestCase {
         int count = 0
         // ------------ START EDITING HERE ----------------------
 
-
-
+	new File('src/').eachFileRecurse {
+		if(it.isFile() && !it.name.endsWith('swp') && it.text.contains('Lor'+'em')) {
+			count += 1
+		}
+	}
+	
 
         // ------------ STOP EDITING HERE  ----------------------
         assert count == 3
@@ -83,7 +92,11 @@ class Koan06 extends GroovyTestCase {
         def primesBetween200And250 = []
         // ------------ START EDITING HERE ----------------------
 
+	def isPrime = { num ->
+	    (2..Math.sqrt(num)).every{num % it != 0}
+	}
 
+	primesBetween200And250 = (200..250).findAll(isPrime)
 
 
         // ------------ STOP EDITING HERE  ----------------------
