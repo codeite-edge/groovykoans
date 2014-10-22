@@ -12,8 +12,24 @@ import org.codehaus.groovy.runtime.InvokerHelper
 class Robot {
     // ------------ START EDITING HERE ----------------------
 
+    int x = 0, y = 0
 
+    def up() { y++ } 
 
+    def down() { y-- }
 
+    def left() { x-- }
+
+    def right() { x++}
+
+    Object invokeMethod(String name, Object args) {
+    	if(name.startsWith('go')) {
+		(name =~ /(Up|Down|Left|Right)/).each {
+	        	def methodName = it[0].toLowerCase()
+		        def metaMethod = InvokerHelper.getMetaClass(this).getMetaMethod(methodName, args)
+		        metaMethod.invoke(this, args)
+	         }
+         }
+    }
     // ------------ STOP EDITING HERE  ----------------------
 }

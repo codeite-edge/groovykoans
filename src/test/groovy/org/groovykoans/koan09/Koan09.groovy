@@ -32,8 +32,9 @@ class Koan09 extends GroovyTestCase {
         def expando = new Expando()
         // ------------ START EDITING HERE ----------------------
 
-
-
+	expando.firstName = "Sam"
+	expando.sayHello = { "Hello from ${firstName}" }
+	
 
         // ------------ STOP EDITING HERE  ----------------------
 
@@ -51,7 +52,8 @@ class Koan09 extends GroovyTestCase {
         def proxy
         // ------------ START EDITING HERE ----------------------
 
-
+	proxy = ProxyMetaClass.getInstance(SensitiveService)
+	proxy.interceptor = new NukeInterceptor()
 
 
         // ------------ STOP EDITING HERE  ----------------------
@@ -75,7 +77,7 @@ class Koan09 extends GroovyTestCase {
         // ------------ START EDITING HERE ----------------------
 
 
-
+	expectedThisClassName = "org.groovykoans.koan09.Koan09"
 
         // ------------ STOP EDITING HERE  ----------------------
         assert this.class.name == expectedThisClassName
@@ -105,7 +107,8 @@ class Koan09 extends GroovyTestCase {
         def expectedWeightOnMoon, expectedWeightOnEarth
         // ------------ START EDITING HERE ----------------------
 
-
+	expectedWeightOnMoon = new ConstantsOnMoon().gravity * 10
+	expectedWeightOnEarth= new ConstantsOnEarth().gravity * 10
 
 
         // ------------ STOP EDITING HERE  ----------------------
@@ -117,7 +120,7 @@ class Koan09 extends GroovyTestCase {
         // Create a fake environment using the technique in the link to create a gravity of 6
         // ------------ START EDITING HERE ----------------------
 
-
+	calculateWeight.delegate = [gravity: 6]
 
 
         // ------------ STOP EDITING HERE  ----------------------
@@ -173,7 +176,12 @@ class Koan09 extends GroovyTestCase {
 
         // ------------ START EDITING HERE ----------------------
 
-
+	Integer.metaClass.fizzBuzz << {
+		if (delegate % 15 == 0) { "FizzBuzz" }
+		else if (delegate % 5 == 0 ) { "Buzz" }
+		else if (delegate % 3 == 0 ) { "Fizz" }
+		else { "$delegate" }
+	}
 
 
         // ------------ STOP EDITING HERE  ----------------------
