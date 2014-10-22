@@ -30,6 +30,14 @@ class Koan08 extends GroovyTestCase {
             // ------------ START EDITING HERE ----------------------
 
 
+		switch(input) {
+			case 1..100:
+				return input/2
+			case ~/^.*ee$/:
+				return input.replaceAll(~/ee$/) {"ey"}
+			default:
+				return input
+		}
 
 
             // ------------ STOP EDITING HERE  ----------------------
@@ -89,9 +97,10 @@ class Koan08 extends GroovyTestCase {
         // Create a closure that returns two random integers in a given range
         def generateTwoRandomInts = { int maxInt ->
             // ------------ START EDITING HERE ----------------------
+	    
+	    Random random = new Random()
 
-
-
+	    [random.nextInt(maxInt), random.nextInt(maxInt)]
 
             // ------------ STOP EDITING HERE  ----------------------
         }

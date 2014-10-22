@@ -12,7 +12,13 @@ public enum Feeling {
 
     // ------------ START EDITING HERE ----------------------
 
+    def isCase(Cartoon cartoon) {
+	cartoon.feeling == this
+    }
 
+    def isCase(Person person) {
+	person.feelings.contains(this)
+    }
 
 
     // ------------ STOP EDITING HERE  ----------------------
